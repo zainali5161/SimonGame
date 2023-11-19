@@ -24,6 +24,7 @@ if(pattern[userClicks]!=id){
     pattern =[];
     level = 0;
     gameOver=true;
+	gameStart = true;
 }
 
 if(userClicks+1 === pattern.length && !gameOver){
@@ -45,6 +46,12 @@ function animateButton(id){
 }
 $(document).keydown((kevent)=>{
     if ((kevent.originalEvent.key) === 'a' && gameStart){
+        GameHistory();
+        gameStart = false;
+    }
+});
+$(document).click((kevent)=>{
+    if (gameStart){
         GameHistory();
         gameStart = false;
     }
