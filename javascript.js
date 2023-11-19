@@ -14,6 +14,7 @@ function GameHistory(){
     userClicks=-1;
 }
 $(".btn").on("click",(event)=>{
+if(!gameStart){
 const id = event.target.id;
 this.animateButton(id);
 userClicks++;
@@ -25,12 +26,13 @@ if(pattern[userClicks]!=id){
     level = 0;
     gameOver=true;
 	gameStart = true;
+	$("body").addClass("game-over")
 }
 
 if(userClicks+1 === pattern.length && !gameOver){
     setTimeout(GameHistory,1000);
 }
-
+}
 } );
 function playSound(id){
     const audio = new Audio()
