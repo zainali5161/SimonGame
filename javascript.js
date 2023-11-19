@@ -61,6 +61,7 @@ $(document).click((kevent)=>{
         GameHistory();
         gameStart = false;
 		pattern = [];
-		$("body").removeClass("game-over");
     }
+	$("body").removeClass("game-over");
+
 })
