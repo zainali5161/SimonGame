@@ -48,19 +48,20 @@ function animateButton(id){
 $(document).keydown((kevent)=>{
     if ((kevent.originalEvent.key) === 'a' && gameStart){
 		    $(".btn").each((index,value) => {colors.push(value.id)});
-
-        GameHistory();
         gameStart = false;
 		pattern =[];
-		$("body").removeClass("game-over");
+        GameHistory();
     }
+			$("body").removeClass("game-over");
+
 });
 $(document).click((kevent)=>{
     if (gameStart ){
 		$(".btn").each((index,value) => {colors.push(value.id)});
-        GameHistory();
         gameStart = false;
 		pattern = [];
+		GameHistory();
+        
     }
 	$("body").removeClass("game-over");
 
