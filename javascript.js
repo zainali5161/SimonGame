@@ -2,10 +2,9 @@ let level = 0;
 let pattern = []
 let userClicks = -1;
 let gameStart = true;
+let colors = [];
 function GameHistory(){
-    colors = []
-    $(".btn").each((index,value) => {colors.push(value.id)});
-    const index =Math.round(Math.random()* (colors.length-1))
+    const index =Math.round(Math.random()* (colors.length -1))
     const  id = colors[index];
     pattern.push(id);
     console.log(index,pattern);
@@ -14,19 +13,19 @@ function GameHistory(){
     userClicks=-1;
 }
 $(".btn").on("click",(event)=>{
-if(!gameStart){
 const id = event.target.id;
+if(!gameStart && colors.filter(item => item === id)){
 this.animateButton(id);
 userClicks++;
 let gameOver=false;
-if(pattern[userClicks]!=id){
-    $("#level-title").text("Game Over, Refresh the page to play again");
-    userClicks = -1
+if(pattern[userClicks]!= id){
+	userClicks = -1
     pattern =[];
     level = 0;
-    gameOver=true;
-	gameStart = true;
+    gameOver = true;
 	$("body").addClass("game-over")
+    $("#level-title").text("Game Over, Refresh the page to play again");
+
 }
 
 if(userClicks+1 === pattern.length && !gameOver){
@@ -48,13 +47,20 @@ function animateButton(id){
 }
 $(document).keydown((kevent)=>{
     if ((kevent.originalEvent.key) === 'a' && gameStart){
+		    $(".btn").each((index,value) => {colors.push(value.id)});
+
         GameHistory();
         gameStart = false;
+		pattern =[];
+		$("body").removeClass("game-over");
     }
 });
 $(document).click((kevent)=>{
-    if (gameStart){
+    if (gameStart ){
+		$(".btn").each((index,value) => {colors.push(value.id)});
         GameHistory();
         gameStart = false;
+		pattern = [];
+		$("body").removeClass("game-over");
     }
 })
